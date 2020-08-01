@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        
         _transform = gameObject.GetComponent<Transform>();
         layerGround = LayerMask.NameToLayer("Ground");
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -44,10 +43,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         var x = Input.GetAxis(axisName: "Horizontal");
-        Debug.Log("allo" + x);
+        var y = Input.GetAxis(axisName: "Vertical");
 
-
-        if(x != null)
+        if(x != 0)
         {
             MoveHorizontal(x);
         }
