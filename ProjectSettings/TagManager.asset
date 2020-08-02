@@ -14,9 +14,9 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
-  - 
+  - ThrowPath
+  - Player
+  - Thing
   - 
   - 
   - 

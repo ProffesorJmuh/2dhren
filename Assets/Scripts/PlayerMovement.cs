@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     public void MoveHorizontal(float x)
     {
         float speed;                                                        // текущая скорость персонажа
-        _rigidbody.AddForce(x * (isGrounded ? Acceleration: AccelInJump) * Vector2.right * WalkSpeed);  // добавляем силу
+        _rigidbody.AddForce(x * (isGrounded ? Acceleration: AccelInJump) * Vector2.right * WalkSpeed, ForceMode2D.Impulse);  // добавляем силу
         // Ограничение скорости
         if (isSitting)
             // в присяде
