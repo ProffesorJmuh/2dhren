@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     private int layerGround;
+    private int layerThing;
 
     private Vector3 normalScale;
     private DirectionState _directionState = DirectionState.Right;
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _transform = gameObject.GetComponent<Transform>();
         layerGround = LayerMask.NameToLayer("Ground");
+        layerThing = LayerMask.NameToLayer("Thing");
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -62,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // если касаемся земли, то поднимаем флаг
 
-        if (coll.gameObject.layer == layerGround)
+        if (coll.gameObject.layer == layerGround || coll.gameObject.layer == layerThing)
         {
             //_animatorController.SetBool("isJump", false);
             isGrounded = true;
@@ -72,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionExit2D(Collision2D coll)
     {
         // если не касаемся земли, то убираем флаг
-        if (coll.gameObject.layer == layerGround)
+        if (coll.gameObject.layer == layerGround || coll.gameObject.layer == layerThing)
         {
             isGrounded = false;
         }
