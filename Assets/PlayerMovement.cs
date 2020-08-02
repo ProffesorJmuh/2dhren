@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public double asd = 0.0;
-    private Transform transform;
 
     [Header("Speeds")]
-    public float maxSpeed = 5f;
-    public float WalkSpeed = 3f;
-    public float JumpForce = 10f;
+    public float maxSpeed = 8f;
+    public float WalkSpeed = 2f;
+    public float JumpForce = 5f;
     public float Acceleration = 5f;
 
     private int layerGround;
@@ -21,10 +19,12 @@ public class PlayerMovement : MonoBehaviour
     private Transform _transform;
     private Rigidbody2D _rigidbody;
 
-
+    private bool isSitting = false;
 
     private bool isGrounded = false;
 
+
+    // ставим нач значения
     void Awake()
     {
         _transform = gameObject.GetComponent<Transform>();
@@ -45,26 +45,20 @@ public class PlayerMovement : MonoBehaviour
         var x = Input.GetAxis(axisName: "Horizontal");
         var y = Input.GetAxis(axisName: "Vertical");
 
-        if(x != 0)
-        {
-            MoveHorizontal(x);
-        }
+        MoveHorizontal(x);
+        MoveVertical(y);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
     }
 
 
     void FixedUpdate()
     {
-        
+
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log(coll.gameObject.layer);
+        // если касаемся земли, то поднимаем флаг
 
         if (coll.gameObject.layer == layerGround)
         {
@@ -75,38 +69,64 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D coll)
     {
-        Debug.Log(coll.gameObject.layer);
+        // если не касаемся земли, то убираем флаг
         if (coll.gameObject.layer == layerGround)
         {
             isGrounded = false;
         }
     }
 
+    public void Jump()
+    {
+        // если не в воздухе
+        if (isGrounded)
+        {
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, JumpForce);        // конечная скорость
+        }
+    }
+
     public void StandUp()
     {
-        _transform.localScale = normalScale;
+        _transform.localScale = normalScale;                                    // возвращаемся к нормальной высоте
+        if (isSitting && isGrounded) _transform.position += normalScale.y / 4 * Vector3.up;   // если объкт сидел, то поднимаем объект
+
+        isSitting = false;                                                      // убираем флаг сидячего положения
     }
 
     public void SitDown()
     {
-        _transform.localScale = new Vector3(normalScale.x, normalScale.y / 2, normalScale.z);
+        _transform.localScale = new Vector3(normalScale.x, normalScale.y / 2, normalScale.z);   // уменьшаем высоту
+
+        if (!isSitting && isGrounded) _transform.position -= normalScale.y / 4 * Vector3.up;    // если объкт стоял, то опускаем объект
+
+        isSitting = true;                                                                       // поднимаем флаг сидячего положения
     }
 
     public void MoveHorizontal(float x)
     {
-        _rigidbody.AddForce(x * Vector2.right * Acceleration);
+        float speed;                                                        // текущая скорость персонажа
+        _rigidbody.AddForce(x * Vector2.right * Acceleration * WalkSpeed);  // добавляем силу
         // Ограничение скорости
-        var speed = Mathf.Clamp(_rigidbody.velocity.x, -maxSpeed, maxSpeed);
-        _rigidbody.velocity = new Vector2(speed, _rigidbody.velocity.y);
+        if (isSitting)
+            // в присяде
+            speed = Mathf.Clamp(_rigidbody.velocity.x, -WalkSpeed, WalkSpeed);
+        else
+            // в обычном состоянии
+            speed = Mathf.Clamp(_rigidbody.velocity.x, -maxSpeed, maxSpeed);
+        
+        _rigidbody.velocity = new Vector2(speed, _rigidbody.velocity.y);    // конечная скорость
     }
 
     public void MoveVertical(float y)
     {
-        if (y > 0) ;
+        if (y > 0) Jump();                  // прыгаем
+        else if (y < 0) SitDown();          // приседаем
+
+        if (isSitting && y >= 0) StandUp(); // если не сидим, то встаём
     }
 
 
-    public void MoveRight()
+    /*public void MoveRight()
     {
 
         if (_directionState == DirectionState.Left)
@@ -143,14 +163,8 @@ public class PlayerMovement : MonoBehaviour
         _directionState = _directionState == DirectionState.Left ?
             DirectionState.Right : DirectionState.Left;
     }
-
-    public void Jump()
-    {
-        if (isGrounded)
-        {
-            _rigidbody.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-        }
-    }
+*/
+    
     enum DirectionState
     {
         Right,
