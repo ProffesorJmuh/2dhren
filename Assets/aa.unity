@@ -348,6 +348,7 @@ MonoBehaviour:
   WalkSpeed: 2
   JumpForce: 5
   Acceleration: 5
+  AccelInJump: 3
 --- !u!212 &1634825605
 SpriteRenderer:
   m_ObjectHideFlags: 0

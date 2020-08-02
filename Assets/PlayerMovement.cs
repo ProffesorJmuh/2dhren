@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public float WalkSpeed = 2f;
     public float JumpForce = 5f;
     public float Acceleration = 5f;
+    public float AccelInJump = 3f;
+
 
     private int layerGround;
 
@@ -105,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     public void MoveHorizontal(float x)
     {
         float speed;                                                        // текущая скорость персонажа
-        _rigidbody.AddForce(x * Vector2.right * Acceleration * WalkSpeed);  // добавляем силу
+        _rigidbody.AddForce(x * (isGrounded ? Acceleration: AccelInJump) * Vector2.right * WalkSpeed);  // добавляем силу
         // Ограничение скорости
         if (isSitting)
             // в присяде
