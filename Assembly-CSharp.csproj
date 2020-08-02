@@ -63,7 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Reference Include="UnityEngine">
       <HintPath>G:/unityhub/unity/2019.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
