@@ -63,9 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ITrajectoryRenderer.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\ThrowDirection.cs" />
     <Compile Include="Assets\Scripts\ThrowPathBehavior.cs" />
     <Compile Include="Assets\Scripts\Throwable.cs" />
+    <Compile Include="Assets\Scripts\TrajectoryRenderer.cs" />
+    <Compile Include="Assets\Scripts\TrajectoryRendererAdvanced.cs" />
     <Reference Include="UnityEngine">
       <HintPath>G:/unityhub/unity/2019.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
