@@ -131,8 +131,8 @@ GameObject:
   m_Component:
   - component: {fileID: 316070655}
   - component: {fileID: 316070654}
-  - component: {fileID: 316070653}
   - component: {fileID: 316070652}
+  - component: {fileID: 316070653}
   m_Layer: 0
   m_Name: Trajectory
   m_TagString: Untagged
@@ -215,7 +215,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.22127724
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 666170458}
   m_Layer: 8
   m_Name: New Sprite
-  m_TagString: Grounded
+  m_TagString: Hitable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031005936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebe201b9a0e456e4e8dc2606b07e4a68, type: 3}
   m_Name: 
@@ -613,6 +613,11 @@ PrefabInstance:
       propertyPath: Trajectory
       value: 
       objectReference: {fileID: 316070652}
+    - target: {fileID: 7840746889142471402, guid: 5e0ed3993c601ad45acb46dcb4110e5c,
+        type: 3}
+      propertyPath: Power
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9112238619428927449, guid: 5e0ed3993c601ad45acb46dcb4110e5c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -741,6 +746,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ThrowPath
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516521462429666505, guid: f787e347b283d724f9104dfc4b2dd255,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f787e347b283d724f9104dfc4b2dd255, type: 3}

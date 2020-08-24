@@ -7,7 +7,7 @@ public class ThrowDirection : MonoBehaviour
     // public GameObject BulletPrefab;
     public float Power = 100;
 
-    public TrajectoryRenderer Trajectory;
+    public ITrajectoryRenderer Trajectory;
     //public TrajectoryRendererAdvanced Trajectory;
 
     private Camera mainCamera;

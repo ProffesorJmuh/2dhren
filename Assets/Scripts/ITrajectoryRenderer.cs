@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITrajectoryRenderer
+public abstract class ITrajectoryRenderer: MonoBehaviour
 {
-    void ShowTrajectory(Vector3 origin, Vector3 speed);
+    public abstract void ShowTrajectory(Vector3 origin, Vector3 speed);
 }
